@@ -34,5 +34,28 @@ namespace Business.Concrete
         {
             return _carDal.GetAll(p => p.ColorId == id);
         }
+
+        public void Add(Car car)
+        {
+            if (car.Description.Length <= 2 || car.DailyPrice <= 0)
+            {
+                Console.WriteLine("Araç tanımı 2 karakter veya daha uzun olmalıdır; araç günlük fiyatı 0'dan büyük olmalıdır");
+            }
+            else
+            {
+                _carDal.Add(car);
+            }
+            
+        }
+
+        public void Update(Car car)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Car car)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
