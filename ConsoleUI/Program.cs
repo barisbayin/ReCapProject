@@ -118,6 +118,13 @@ namespace ConsoleUI
                 Console.WriteLine("Marka ID: {0}, Marka Adı: {1}", brand.Id, brand.BrandName);
             }
 
+
+            Console.WriteLine("------------------------------Veri tabanındaki tüm markalar------------------------------");
+            foreach (var car in carManager.GetCarDetails())
+            {
+                Console.WriteLine("Marka: {0} | Renk: {1}  | Model Yılı: {2} | Günlük Fiyat: {3}  | Tanımlama: {4}", car.BrandName, car.ColorName, car.ModelYear, car.DailyPrice, car.Description);
+            }
+
         }
     }
 }

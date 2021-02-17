@@ -5,7 +5,9 @@ using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -56,6 +58,23 @@ namespace DataAccess.Concrete.EntityFramework
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
                 context.SaveChanges();
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            using (CarRentalContext context=new CarRentalContext())
+            {
+                var result = from c in context.Cars
+                    join b in context.Brands on c.BrandId equals b.Id
+                    join r in context.Colors on c.ColorId equals r.Id
+                    select new CarDetailDto
+                    {
+                        Id = c.Id, BrandName = b.BrandName, ColorName = r.ColorName, ModelYear = c.ModelYear,
+                        DailyPrice = c.DailyPrice, Description = c.Description
+
+                    };
+                return result.ToList();
             }
         }
     }
