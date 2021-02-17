@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
-using Entities.Abstract;
+using Core.Entities;
 
-namespace DataAccess.Abstract
+namespace Core.DataAccess
 {
     //Generic constraint : IEntityRepository<T> içerisindeki T'nin neler olabileceğini belirlememize yaramaktadır. Yani T hangi veri tiplerinden olması gerekiyorsa (int, string, class, object vs.)  ona göre kısıtlamaya gidilir.
 

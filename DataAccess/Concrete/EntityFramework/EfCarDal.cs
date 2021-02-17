@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal:ICarDal
+    public class EfCarDal : ICarDal
     {
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
@@ -31,10 +31,10 @@ namespace DataAccess.Concrete.EntityFramework
         {
             //IDisposable pattern implementation of c#
             //using bittikten hemen sonra garbage collector tarafından bellekten silinir. Performans artırıcı etkisi vardır.
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
-                var addedEntitiy = context.Entry(entity); 
-                addedEntitiy.State = EntityState.Added;
+                var addedEntity = context.Entry(entity);
+                addedEntity.State = EntityState.Added;
                 context.SaveChanges();
             }
         }
@@ -43,8 +43,8 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (CarRentalContext context = new CarRentalContext())
             {
-                var updatedEntitiy = context.Entry(entity);
-                updatedEntitiy.State = EntityState.Modified;
+                var updatedEntity = context.Entry(entity);
+                updatedEntity.State = EntityState.Modified;
                 context.SaveChanges();
             }
         }
@@ -53,8 +53,8 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (CarRentalContext context = new CarRentalContext())
             {
-                var deletedEntitiy = context.Entry(entity);
-                deletedEntitiy.State = EntityState.Deleted;
+                var deletedEntity = context.Entry(entity);
+                deletedEntity.State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }
