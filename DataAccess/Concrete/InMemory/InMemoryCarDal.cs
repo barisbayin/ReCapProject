@@ -18,10 +18,10 @@ namespace DataAccess.Concrete.InMemory
             //Burada sanki veritabanından veri geliyormuş gibi simüle ediyoruz.
             _cars = new List<Car>
             {
-                new Car{Id = 1, ColorId = 1, BrandId =1, ModelYear =2020, DailyPrice = 150, Description = "Dizel araç"},
-                new Car{Id = 2, ColorId = 2, BrandId =2, ModelYear =2021, DailyPrice = 200, Description = "Benzinli araç"},
-                new Car{Id = 3, ColorId = 3, BrandId =3, ModelYear =2021, DailyPrice = 300, Description = "Elektrikli araç"},
-                new Car{Id = 4, ColorId = 1, BrandId =1, ModelYear =2020, DailyPrice = 400, Description = "Hibrit araç"}
+                new Car{CarId = 1, ColorId = 1, BrandId =1, ModelYear =2020, DailyPrice = 150, Description = "Dizel araç"},
+                new Car{CarId = 2, ColorId = 2, BrandId =2, ModelYear =2021, DailyPrice = 200, Description = "Benzinli araç"},
+                new Car{CarId = 3, ColorId = 3, BrandId =3, ModelYear =2021, DailyPrice = 300, Description = "Elektrikli araç"},
+                new Car{CarId = 4, ColorId = 1, BrandId =1, ModelYear =2020, DailyPrice = 400, Description = "Hibrit araç"}
             };
         }
         public List<Car> GetAll()
@@ -31,7 +31,7 @@ namespace DataAccess.Concrete.InMemory
 
         public List<Car> GetById(int id)
         {
-            return _cars.Where(p => p.Id == id).ToList();
+            return _cars.Where(p => p.CarId == id).ToList();
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
@@ -52,7 +52,7 @@ namespace DataAccess.Concrete.InMemory
         public void Update(Car car)
         {
             // Gönderdiğimiz ürünün ID2sine sahip ürünü bul.
-            Car carToUpdate = _cars.SingleOrDefault(p => p.Id == car.Id);
+            Car carToUpdate = _cars.SingleOrDefault(p => p.CarId == car.CarId);
 
             carToUpdate.BrandId = car.BrandId;
             carToUpdate.ColorId = car.ColorId;
@@ -76,7 +76,7 @@ namespace DataAccess.Concrete.InMemory
             //}
 
 
-            Car carToDelete = _cars.SingleOrDefault(p => p.Id == car.Id);
+            Car carToDelete = _cars.SingleOrDefault(p => p.CarId == car.CarId);
 
             _cars.Remove(carToDelete);
 

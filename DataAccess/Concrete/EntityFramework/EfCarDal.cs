@@ -33,6 +33,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             //IDisposable pattern implementation of c#
             //using bittikten hemen sonra garbage collector tarafından bellekten silinir. Performans artırıcı etkisi vardır.
+
             using (CarRentalContext context = new CarRentalContext())
             {
                 var addedEntity = context.Entry(entity);
@@ -66,11 +67,11 @@ namespace DataAccess.Concrete.EntityFramework
             using (CarRentalContext context=new CarRentalContext())
             {
                 var result = from c in context.Cars
-                    join b in context.Brands on c.BrandId equals b.Id
-                    join r in context.Colors on c.ColorId equals r.Id
+                    join b in context.Brands on c.BrandId equals b.BrandId
+                    join r in context.Colors on c.ColorId equals r.ColorId
                     select new CarDetailDto
                     {
-                        Id = c.Id, BrandName = b.BrandName, ColorName = r.ColorName, ModelYear = c.ModelYear,
+                        CarId = c.CarId, BrandName = b.BrandName, ColorName = r.ColorName, ModelYear = c.ModelYear,
                         DailyPrice = c.DailyPrice, Description = c.Description
 
                     };
