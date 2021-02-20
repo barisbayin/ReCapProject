@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
@@ -13,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public List<Customer> GetAll(Expression<Func<Customer, bool>> filter = null)
         {
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 return filter == null
                     ? context.Set<Customer>().ToList()
@@ -31,7 +32,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Add(Customer entity)
         {
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
@@ -51,11 +52,31 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Delete(Customer entity)
         {
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
                 context.SaveChanges();
+            }
+        }
+
+        public List<CustomerDetailDto> GetCustomerDetails()
+        {
+            using (CarRentalContext context = new CarRentalContext())
+            {
+                var result = from c in context.Customers
+                             join u in context.Users on c.UserId equals u.UserId
+                             select new CustomerDetailDto
+                             {
+                                 CustomerId = c.CustomerId,
+                                 UserId = c.UserId,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName,
+                                 CompanyName = c.CompanyName,
+                                 Email = u.Email,
+                                 Password = u.Password
+                             };
+                return result.ToList();
             }
         }
     }

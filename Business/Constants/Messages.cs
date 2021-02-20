@@ -39,18 +39,19 @@ namespace Business.Constants
         public static string UsersListed = "Kullanıcılar listelendi!";
         public static string UsersListedById = "Kulanıcılar id'ye göre listelendi!";
         public static string UserListedById = "Kullanıcı id'ye göre listelendi!";
-        public static string UserAdded = "Kullanıcı eklandi!";
+        public static string UserAdded = "Kullanıcı eklendi!";
         public static string UserUpdated = "KUllanıcı düncellendi!";
         public static string UserDeleted = "Kullanıcı silindi!";
         public static string BrandListed = "Marka listelendi!";
-        internal static string RentalsListed;
-        internal static string RentalsListedByCustomerId;
-        internal static string RentalsListedByCarId;
-        internal static string RentalListedById;
-        internal static List<Rental> RentalDateInvalid;
-        internal static List<Rental> ReturnDateInvalid;
-        internal static string RentalAdded;
-        internal static string RentalUpdated;
-        internal static string RentalDeleted;
+        public static string RentalsListed="Araç kiralama listesi yüklendi!";
+        public static string RentalsListedByCustomerId="Araç kiralama listesi müşteri id'sine göre listelendi!";
+        public static string RentalsListedByCarId="Araç kiralama listesi araç id'sine göre listelendi!";
+        public static string RentalListedById="Kiralık araç id'ye göre listelendi";
+        public static string RentalDateInvalid="Geçersiz tarih seçimi: ilk tarih son tarihten büyük olamaz!";
+        public static string ReturnDateInvalid= "Geçersiz tarih seçimi: ilk tarih son tarihten büyük olamaz!";
+        public static string RentalAdded="Araç kiralama işlemi kaydedildi!";
+        public static string RentalUpdated="Araç kiralama işlemi güncellendi!";
+        public static string RentalDeleted="Araç kiralama işlemi silindi!";
+        internal static string RentalDetailsListed;
     }
 }

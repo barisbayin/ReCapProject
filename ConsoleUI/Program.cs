@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace ConsoleUI
 {
@@ -10,17 +12,47 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager  carManager=new CarManager(new EfCarDal());
+            CustomerManager customerManager=new CustomerManager(new EfCustomerDal());
 
-            var result = carManager.GetCarDetails();
+            Console.WriteLine(customerManager.Add(new Customer { UserId =5, CompanyName = "DSV Lojistik"}).Message);
 
-            if (result.Success)
+            Console.WriteLine("-----------------------------Kullanıcı listesi-----------------------------");
+
+            foreach (var customer in customerManager.GetAll().Data)
             {
-                foreach (var car in result.Data)
-                {
-                    Console.WriteLine("Marka: {0} | Renk: {1}  | Model Yılı: {2} | Günlük Fiyat: {3}  | Tanımlama: {4}", car.BrandName, car.ColorName, car.ModelYear, car.DailyPrice, car.Description);
-                }
+                Console.WriteLine("Müşteri Id: {0}, Müşterin KUllanıcı Id: {1}, Şirket Adı:{2} ", customer.CustomerId, customer.UserId, customer.CompanyName);
             }
+
+            Console.WriteLine("-----------------------------Kullanıcı detay listesi-----------------------------");
+
+            foreach (var customer in customerManager.GetCustomerDetails().Data)
+            {
+                Console.WriteLine("Müşteri Id: {0}, Müşteri Kullanıcı Id No: {1}, Müşteri Adı {2}, Müşteri Soyadı: {3}, Şirket Adı: {4}, Email:{5}, Şifre{6}", customer.CustomerId, customer.UserId, customer.FirstName, customer.LastName, customer.CompanyName,customer.Email,customer.Password);
+            }
+
+            //UserManager userManager=new UserManager(new EfUserDal());
+
+            //Console.WriteLine(userManager.Add(new User { FirstName = "Ezgi", LastName = "Yücel", Email = "ezgiyucel@xmail.com", Password = "12345" }).Message);
+
+            //foreach (var user in userManager.GetAll().Data)
+            //{
+            //    Console.WriteLine("-----------------------------Kullanıcı listesi-----------------------------");
+            //    Console.WriteLine("Kullanıcı Id: {0}, KUllanıcı Adı: {1}, Kullanıcı Soyadı:{2}, Email{3}, Şifre{4}",user.UserId,user.FirstName,user.LastName,user.Email,user.Password);
+            //}
+
+
+
+            //CarManager carManager = new CarManager(new EfCarDal());
+
+            //var result = carManager.GetCarDetails();
+
+            //if (result.Success)
+            //{
+            //    foreach (var car in result.Data)
+            //    {
+            //        Console.WriteLine("Marka: {0} | Renk: {1}  | Model Yılı: {2} | Günlük Fiyat: {3}  | Tanımlama: {4}", car.BrandName, car.ColorName, car.ModelYear, car.DailyPrice, car.Description);
+            //    }
+            //}
 
 
             //Console.WriteLine("------------------------------Tüm Araçlar------------------------------");

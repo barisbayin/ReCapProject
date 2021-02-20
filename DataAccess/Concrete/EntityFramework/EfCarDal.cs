@@ -64,17 +64,20 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<CarDetailDto> GetCarDetails()
         {
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var result = from c in context.Cars
-                    join b in context.Brands on c.BrandId equals b.BrandId
-                    join r in context.Colors on c.ColorId equals r.ColorId
-                    select new CarDetailDto
-                    {
-                        CarId = c.CarId, BrandName = b.BrandName, ColorName = r.ColorName, ModelYear = c.ModelYear,
-                        DailyPrice = c.DailyPrice, Description = c.Description
-
-                    };
+                             join b in context.Brands on c.BrandId equals b.BrandId
+                             join r in context.Colors on c.ColorId equals r.ColorId
+                             select new CarDetailDto
+                             {
+                                 CarId = c.CarId,
+                                 BrandName = b.BrandName,
+                                 ColorName = r.ColorName,
+                                 ModelYear = c.ModelYear,
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description
+                             };
                 return result.ToList();
             }
         }

@@ -6,6 +6,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -34,7 +35,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetRentalById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(p => p.RentId == id), Messages.RentalListedById);
+            return new SuccessDataResult<Rental>(_rentalDal.Get(p => p.RentalId == id), Messages.RentalListedById);
         }
 
         public IDataResult<List<Rental>> GetByRentalDate(DateTime date1, DateTime date2)
@@ -62,14 +63,24 @@ namespace Business.Concrete
 
         }
 
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(),Messages.RentalDetailsListed);
+        }
+
         public IResult Add(Rental rental)
         {
+          
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult Update(Rental rental)
         {
+            if (return  _rentalDal.Get(p=>p.CarId==rental.CarId))
+            {
+                
+            }
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
         }
