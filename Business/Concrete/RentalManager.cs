@@ -68,6 +68,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(),Messages.RentalDetailsListed);
         }
 
+        public IResult CarAvailabilityCheck(Rental rental)
+        {
+            if (_rentalDal.Get(rental.CarId))
+            {
+                
+            }
+        }
+
         public IResult Add(Rental rental)
         {
           
@@ -77,13 +85,12 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental)
         {
-            if (return  _rentalDal.Get(p=>p.CarId==rental.CarId))
-            {
-                
-            }
+
+
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
         }
+
 
         public IResult Delete(Rental rental)
         {
