@@ -6,7 +6,7 @@ using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    interface IBrandSevice
+    public interface IBrandService
     {
         IDataResult<List<Brand>> GetAll();
         IDataResult<List<Brand>> GetBrandsByBrandId(int id);

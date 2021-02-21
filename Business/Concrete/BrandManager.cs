@@ -9,7 +9,7 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class BrandManager : IBrandSevice
+    public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
 
