@@ -33,7 +33,14 @@ namespace ConsoleUI
                 Console.WriteLine("Kiralama Id: {0}, Araç Id: {1} Marka: {2}, Model Yılı: {3}, Araç Rengi:{4}, Günlük Fiyat: {5}, Araç Tanımı: {6} ,Müşteri Id: {7}, Müşteri Adı: {8}, Müşteri Soydı:{9}, Şirket Adı: {10},Müşteri Email: {11}, Kiralama Tarihi Id: {12}, Teslim Tarihi {13}" , rental.RentalId, rental.CarId, rental.BrandName, rental.Color, rental.ModelYear, rental.DailyPrice,rental.Description, rental.CustomerId, rental.CustomerFirstName,rental.CustomerLastName,rental.CompanyName, rental.Email, rental.RentDate, rental.ReturnDate);
             }
 
-            Console.WriteLine(rentalManager.Update(new Rental{CarId = 2, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = DateTime.Now.AddDays(1)}).Message);
+            Console.WriteLine(rentalManager.Update(new Rental {RentalId = 1, CarId = 2, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = DateTime.Now.AddDays(1) }).Message);
+
+            Console.WriteLine("-----------------------------Kiralama listesi-----------------------------");
+
+            foreach (var rental in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine("Kiralama Id: {0}, Araç Id: {1} Müşterin Id: {2}, Kiralama Tarihi: {3}, Araç Teslim Tarihi: {4}", rental.RentalId, rental.CarId, rental.CustomerId, rental.RentDate, rental.ReturnDate);
+            }
 
             //CustomerManager customerManager=new CustomerManager(new EfCustomerDal());
 
