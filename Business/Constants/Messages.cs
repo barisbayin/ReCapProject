@@ -52,6 +52,7 @@ namespace Business.Constants
         public static string RentalAdded="Araç kiralama işlemi kaydedildi!";
         public static string RentalUpdated="Araç kiralama işlemi güncellendi!";
         public static string RentalDeleted="Araç kiralama işlemi silindi!";
-        internal static string RentalDetailsListed;
+        internal static string RentalDetailsListed="Kiralama detayları listelendi!";
+        public static string CarAlreadyRented="Araç zaten kiralanmış!";
     }
 }

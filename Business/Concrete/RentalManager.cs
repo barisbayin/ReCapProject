@@ -68,26 +68,38 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(),Messages.RentalDetailsListed);
         }
 
-        public IResult CarAvailabilityCheck(Rental rental)
-        {
-            if (_rentalDal.Get(rental.CarId))
-            {
-                
-            }
-        }
 
         public IResult Add(Rental rental)
         {
-          
+            var rentalListByCarId = _rentalDal.GetAll(r => r.CarId == rental.CarId);
+            if (rentalListByCarId.Count>0)
+            {
+                foreach (var rentalByCarId in rentalListByCarId)
+                {
+                    if (rentalByCarId.ReturnDate==null)
+                    {
+                        return new ErrorResult(Messages.CarAlreadyRented);
+                    }
+                }
+            }
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult Update(Rental rental)
         {
-
-
-            _rentalDal.Update(rental);
+            var rentalListByCarId = _rentalDal.GetAll(r => r.CarId == rental.CarId);
+            if (rentalListByCarId.Count > 0)
+            {
+                foreach (var rentalByCarId in rentalListByCarId)
+                {
+                    if (rentalByCarId.ReturnDate == null)
+                    {
+                        _rentalDal.Update(rental);
+                        
+                    }
+                }
+            }
             return new SuccessResult(Messages.RentalUpdated);
         }
 

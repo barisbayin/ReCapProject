@@ -29,6 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+
         public void Add(Rental entity)
         {
             using (CarRentalContext context = new CarRentalContext())

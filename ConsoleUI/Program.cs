@@ -12,23 +12,46 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CustomerManager customerManager=new CustomerManager(new EfCustomerDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
-            Console.WriteLine(customerManager.Add(new Customer { UserId =5, CompanyName = "DSV Lojistik"}).Message);
+            Console.WriteLine(rentalManager.Add(new Rental{CarId = 2,CustomerId = 2,RentDate = DateTime.Now}).Message);
 
-            Console.WriteLine("-----------------------------Kullanıcı listesi-----------------------------");
+            Console.WriteLine("-----------------------------Kiralama listesi-----------------------------");
 
-            foreach (var customer in customerManager.GetAll().Data)
+            foreach (var rental in rentalManager.GetAll().Data)
             {
-                Console.WriteLine("Müşteri Id: {0}, Müşterin KUllanıcı Id: {1}, Şirket Adı:{2} ", customer.CustomerId, customer.UserId, customer.CompanyName);
+                Console.WriteLine("Kiralama Id: {0}, Araç Id: {1} Müşterin Id: {2}, Kiralama Tarihi: {3}, Araç Teslim Tarihi: {4}", rental.RentalId, rental.CarId, rental.CustomerId, rental.RentDate,rental.ReturnDate);
             }
 
-            Console.WriteLine("-----------------------------Kullanıcı detay listesi-----------------------------");
 
-            foreach (var customer in customerManager.GetCustomerDetails().Data)
+            
+            Console.WriteLine("-----------------------------Kiralama Detay listesi-----------------------------");
+
+
+            foreach (var rental in rentalManager.GetRentalDetails().Data)
             {
-                Console.WriteLine("Müşteri Id: {0}, Müşteri Kullanıcı Id No: {1}, Müşteri Adı {2}, Müşteri Soyadı: {3}, Şirket Adı: {4}, Email:{5}, Şifre{6}", customer.CustomerId, customer.UserId, customer.FirstName, customer.LastName, customer.CompanyName,customer.Email,customer.Password);
+                Console.WriteLine("Kiralama Id: {0}, Araç Id: {1} Marka: {2}, Model Yılı: {3}, Araç Rengi:{4}, Günlük Fiyat: {5}, Araç Tanımı: {6} ,Müşteri Id: {7}, Müşteri Adı: {8}, Müşteri Soydı:{9}, Şirket Adı: {10},Müşteri Email: {11}, Kiralama Tarihi Id: {12}, Teslim Tarihi {13}" , rental.RentalId, rental.CarId, rental.BrandName, rental.Color, rental.ModelYear, rental.DailyPrice,rental.Description, rental.CustomerId, rental.CustomerFirstName,rental.CustomerLastName,rental.CompanyName, rental.Email, rental.RentDate, rental.ReturnDate);
             }
+
+            Console.WriteLine(rentalManager.Update(new Rental{CarId = 2, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = DateTime.Now.AddDays(1)}).Message);
+
+            //CustomerManager customerManager=new CustomerManager(new EfCustomerDal());
+
+            //Console.WriteLine(customerManager.Add(new Customer { UserId =5, CompanyName = "DSV Lojistik"}).Message);
+
+            //Console.WriteLine("-----------------------------Kullanıcı listesi-----------------------------");
+
+            //foreach (var customer in customerManager.GetAll().Data)
+            //{
+            //    Console.WriteLine("Müşteri Id: {0}, Müşterin KUllanıcı Id: {1}, Şirket Adı:{2} ", customer.CustomerId, customer.UserId, customer.CompanyName);
+            //}
+
+            //Console.WriteLine("-----------------------------Kullanıcı detay listesi-----------------------------");
+
+            //foreach (var customer in customerManager.GetCustomerDetails().Data)
+            //{
+            //    Console.WriteLine("Müşteri Id: {0}, Müşteri Kullanıcı Id No: {1}, Müşteri Adı {2}, Müşteri Soyadı: {3}, Şirket Adı: {4}, Email:{5}, Şifre{6}", customer.CustomerId, customer.UserId, customer.FirstName, customer.LastName, customer.CompanyName,customer.Email,customer.Password);
+            //}
 
             //UserManager userManager=new UserManager(new EfUserDal());
 
