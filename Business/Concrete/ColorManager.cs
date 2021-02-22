@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -29,23 +31,17 @@ namespace Business.Concrete
 
         public IDataResult<Color> GetColorById(int id)
         {
-            return new SuccessDataResult<Color>(_colorDal.Get(p=>p.ColorId==id),Messages.ColorListedById);
+            return new SuccessDataResult<Color>(_colorDal.Get(p => p.ColorId == id), Messages.ColorListedById);
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
-            if (color.ColorName.Length <= 2)
-            {
-                return new ErrorResult(Messages.ColorNameInvalid);
-            }
-            else
-            {
-                _colorDal.Add(color);
-                return new SuccessResult(Messages.ColorAdded);
-            }
-            
+            _colorDal.Add(color);
+            return new SuccessResult(Messages.ColorAdded);
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Update(Color color)
         {
             _colorDal.Update(color);

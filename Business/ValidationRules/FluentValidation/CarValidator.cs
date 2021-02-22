@@ -14,7 +14,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(c => c.BrandId).NotEmpty();
             RuleFor(c => c.ColorId).NotEmpty();
             RuleFor(c => c.ModelYear).NotEmpty();
-            RuleFor(c => c.ModelYear).GreaterThanOrEqualTo(2010);
+            RuleFor(c => c.ModelYear).InclusiveBetween(2010, DateTime.Now.Year);
         }
     }
 }
