@@ -52,7 +52,13 @@ namespace Business.Constants
         public static string RentalAdded="Araç kiralama işlemi kaydedildi!";
         public static string RentalUpdated="Araç kiralama işlemi güncellendi!";
         public static string RentalDeleted="Araç kiralama işlemi silindi!";
-        internal static string RentalDetailsListed="Kiralama detayları listelendi!";
+        public static string RentalDetailsListed="Kiralama detayları listelendi!";
         public static string CarAlreadyRented="Araç zaten kiralanmış!";
+        public static string CarImagesListed="Araç fotoğrafları listelendi";
+        public static string CarImagesListedByCarId="Araç fotoğrafları Id'ye göre listelendi!";
+        public static string CarImageAdded="Araç fotoğrafı eklendi!";
+        public static string CarImageDeleted="Araç fotoğrafı silinidi!";
+        public static string CarImageUpdated="Araç fotoğrafı güncellendi!";
+        public static string CarImageLimitExceeded="Araç fotoğraf sayısı maksimum limitin üzerinde!";
     }
 }
